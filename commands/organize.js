@@ -37,23 +37,27 @@ function organize(mainPath) {
                     console.log("true");
                     let fileExtn = allContents[i].split(".")[1];
                     console.log(fileExtn);
-                    if (fileExtn == "mp4" || fileExtn == "mkv") {
+
+                    if (types.media.includes(fileExtn)) {
                         //media
                         let destPath = path.join(mediaPath, allContents[i]);
                         fs.copyFileSync(filePath, destPath);
-                    } else if (fileExtn == 'zip' || fileExtn == '7z' || fileExtn == 'rar' || fileExtn == 'tar' || fileExtn == 'gz' || fileExtn == 'ar' || fileExtn == 'iso' || fileExtn == "xz") {
+
+                    } else if (types.archives.includes(fileExtn)) {
                         //archives
                         let destPath = path.join(archivesPath, allContents[i]);
                         fs.copyFileSync(filePath, destPath);
-                    }
-                    else if (fileExtn == 'docx' || fileExtn == 'doc' || fileExtn == 'pdf' || fileExtn == 'xlsx' || fileExtn == 'xls' || fileExtn == 'odt' || fileExtn == 'ods' || fileExtn == 'odp' || fileExtn == 'odg' || fileExtn == 'odf' || fileExtn == 'txt' || fileExtn == 'ps' || fileExtn == 'tex') {
+
+                    } else if (types.documents.includes(fileExtn)) {
                         //documents
                         let destPath = path.join(documentsPath, allContents[i]);
                         fs.copyFileSync(filePath, destPath);
-                    } else if (fileExtn == 'exe' || fileExtn == 'dmg' || fileExtn == 'pkg' || fileExtn == "deb") {
+
+                    } else if (types.app.includes(fileExtn)) {
                         //app
                         let destPath = path.join(appPath, allContents[i]);
                         fs.copyFileSync(filePath, destPath);
+
                     } else {
                         //others
                         let destPath = path.join(othersPath, allContents[i]);
